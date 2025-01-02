@@ -7,7 +7,6 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore", message="missing ScriptRunContext! This warning can be ignored when running in bare mode")
 
-
 # Constants for scaling
 scalev = 409.6  # Velocity scale factor
 scaleg = 2367.13  # Acceleration scale factor
