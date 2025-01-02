@@ -34,7 +34,7 @@ def on_message(client, userdata, message):
     buffer = bytearray(payload)
 
     if len(buffer) >= 18:  # Ensure sufficient data
-        int_sensor_id = buffer[2]  # Extract sensor ID
+        int_sensor_id = buffer[2:3]  # Extract sensor ID
 
         if int_sensor_id == 245:  # Check for specific sensor ID
             # Extract and convert sensor data
@@ -94,9 +94,9 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 # Start the MQTT client loop in the background
-client.loop_start()
+# Assign callback functions
+client.on_connect = on_connect
+client.on_message = on_message
 
-# Streamlit loop for live plotting
-while True:
-    update_plot()
-    st.experimental_rerun()
+# Start the MQTT client loop in the background
+client.loop_start()
