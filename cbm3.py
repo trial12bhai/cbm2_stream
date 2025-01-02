@@ -36,7 +36,7 @@ def on_message(client, userdata, message):
     int_sensor_id = buffer[2:3] 
 
     
-    #if int_sensor_id == 245:
+    if int_sensor_id == 245:
     # Extract sensor data (for demonstration, we assume specific byte positions)
         int_velx = buffer[5:7]
         int_vely = buffer[7:9]
@@ -67,20 +67,20 @@ def on_message(client, userdata, message):
     # Update the Streamlit plot
         update_plot()
     # Function to update the plot on Streamlit
-def update_plot():
+        def update_plot():
     # Create the plot in Streamlit
-    st.write("### Sensor Data")
+        st.write("### Sensor Data")
     
-    fig, ax = plt.subplots(2, 1, figsize=(10, 6))
+        fig, ax = plt.subplots(2, 1, figsize=(10, 6))
     
     # Plot Velocity data
-    ax[0].plot(sensor_data['time'], sensor_data['velx'], label='Velocity X')
-    ax[0].plot(sensor_data['time'], sensor_data['vely'], label='Velocity Y')
-    ax[0].plot(sensor_data['time'], sensor_data['velz'], label='Velocity Z')
-    ax[0].set_title('Velocity vs Time')
-    ax[0].set_xlabel('Time')
-    ax[0].set_ylabel('Velocity (scaled)')
-    ax[0].legend()
+        ax[0].plot(sensor_data['time'], sensor_data['velx'], label='Velocity X')
+        ax[0].plot(sensor_data['time'], sensor_data['vely'], label='Velocity Y')
+        ax[0].plot(sensor_data['time'], sensor_data['velz'], label='Velocity Z')
+        ax[0].set_title('Velocity vs Time')
+        ax[0].set_xlabel('Time')
+        ax[0].set_ylabel('Velocity (scaled)')
+        ax[0].legend()
 
     # Plot Acceleration data
    # ax[1].plot(sensor_data['time'], sensor_data['accx'], label='Acceleration X')
@@ -92,9 +92,9 @@ def update_plot():
    # ax[1].legend()
 
     
-    st.pyplot(fig)
+        st.pyplot(fig)
     # After the plot is shown, close it to avoid too many open figures
-    plt.close(fig)
+        plt.close(fig)
 
 
 
