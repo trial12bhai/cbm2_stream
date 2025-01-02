@@ -33,7 +33,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, message):
     payload = message.payload
     buffer = bytearray(payload)
-    
+    int_sensor_id=0
     int_sensor_id = buffer[2] 
 
 if int_sensor_id == 245:
