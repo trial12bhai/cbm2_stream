@@ -54,9 +54,9 @@ def handle_default():
 
 # Dictionary to simulate switch-case
 sensor_handlers = {
-    245: handle_sensor_1,
-    246: handle_sensor_2,
-    248: handle_sensor_3
+    245: int_sensor_id,
+    246: int_sensor_id,
+    248: int_sensor_id
 }
 
 def on_message(client, userdata, message):
@@ -105,7 +105,7 @@ def on_message(client, userdata, message):
     # Function to update the plot on Streamlit
 def update_plot():
     # Create the plot in Streamlit
-    st.write("### Sensor Data" + handle_sensor_1)
+    st.write("### Sensor Data" )
     
     fig, ax = plt.subplots(2, 1, figsize=(10, 6))
     
