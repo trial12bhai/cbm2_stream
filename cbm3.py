@@ -70,6 +70,7 @@ client.loop_start()
 st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
 
+# Streamlit update loop
 while True:
     # Update the graph dynamically
     with graph_placeholder.container():
