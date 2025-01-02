@@ -15,12 +15,12 @@ scaleg = 2367.13  # Acceleration scale factor
 # Initialize global variables for storing data
 sensor_data = {
     'time': deque(maxlen=100),    # To store time values (timestamps)
-    'velx': deque(maxlen=100),    # To store velocity X values
-    'vely': deque(maxlen=100),    # To store velocity Y values
-    'velz': deque(maxlen=100),    # To store velocity Z values
-    'accx': deque(maxlen=100),    # To store acceleration X values
-    'accy': deque(maxlen=100),    # To store acceleration Y values
-    'accz': deque(maxlen=100),    # To store acceleration Z values
+     'velx': deque(maxlen=100),    # To store velocity X values
+#    'vely': deque(maxlen=100),    # To store velocity Y values
+#    'velz': deque(maxlen=100),    # To store velocity Z values
+#    'accx': deque(maxlen=100),    # To store acceleration X values
+#    'accy': deque(maxlen=100),    # To store acceleration Y values
+#    'accz': deque(maxlen=100),    # To store acceleration Z values
 }
 
 # Callback function when connected to MQTT broker
@@ -35,32 +35,32 @@ def on_message(client, userdata, message):
 
     # Extract sensor data (for demonstration, we assume specific byte positions)
     int_velx = buffer[5:7]
-    int_vely = buffer[7:9]
-    int_velz = buffer[9:11]
+ #   int_vely = buffer[7:9]
+ #   int_velz = buffer[9:11]
 
-    int_accx = buffer[11:13]
-    int_accy = buffer[13:15]
-    int_accz = buffer[15:17]
+#    int_accx = buffer[11:13]
+ #   int_accy = buffer[13:15]
+ #   int_accz = buffer[15:17]
 
 
  #   sensorid_int = int.from_bytes(int_sensor_id, byteorder='big',signed=False)
     # Convert bytes to integers
     velxconvert_int = int.from_bytes(int_velx, byteorder='big', signed=False) / scalev
-    velyconvert_int = int.from_bytes(int_vely, byteorder='big', signed=False) / scalev
-    velzconvert_int = int.from_bytes(int_velz, byteorder='big', signed=False) / scalev
+ #   velyconvert_int = int.from_bytes(int_vely, byteorder='big', signed=False) / scalev
+ #   velzconvert_int = int.from_bytes(int_velz, byteorder='big', signed=False) / scalev
 
-    accxconvert_int = int.from_bytes(int_accx, byteorder='big', signed=False) / scaleg
-    accyconvert_int = int.from_bytes(int_accy, byteorder='big', signed=False) / scaleg
-    acczconvert_int = int.from_bytes(int_accz, byteorder='big', signed=False) / scaleg
+ #   accxconvert_int = int.from_bytes(int_accx, byteorder='big', signed=False) / scaleg
+ #   accyconvert_int = int.from_bytes(int_accy, byteorder='big', signed=False) / scaleg
+ #   acczconvert_int = int.from_bytes(int_accz, byteorder='big', signed=False) / scaleg
 
     # Add the received data to the global list (using time as a simple counter here)
     sensor_data['time'].append(len(sensor_data['time']) + 1)  # Simulating time as a counter
     sensor_data['velx'].append(velxconvert_int)
-    sensor_data['vely'].append(velyconvert_int)
-    sensor_data['velz'].append(velzconvert_int)
-    sensor_data['accx'].append(accxconvert_int)
-    sensor_data['accy'].append(accyconvert_int)
-    sensor_data['accz'].append(acczconvert_int)
+ #   sensor_data['vely'].append(velyconvert_int)
+ #   sensor_data['velz'].append(velzconvert_int)
+ #   sensor_data['accx'].append(accxconvert_int)
+ #   sensor_data['accy'].append(accyconvert_int)
+ #   sensor_data['accz'].append(acczconvert_int)
 
     # Update the Streamlit plot
     update_plot()
