@@ -33,8 +33,8 @@ def on_message(client, userdata, message):
     payload = message.payload
     buffer = bytearray(payload)
 
-    if len(buffer) >= 18:  # Ensure sufficient data
-        int_sensor_id = buffer[2:3]  # Extract sensor ID
+    #if len(buffer) >= 18:  # Ensure sufficient data
+        int_sensor_id = 245 #= buffer[2:3]  # Extract sensor ID
 
         if int_sensor_id == 245:  # Check for specific sensor ID
             # Extract and convert sensor data
