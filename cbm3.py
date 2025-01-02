@@ -88,13 +88,9 @@ def update_plot():
     ax[1].set_xlabel('Time')
     ax[1].set_ylabel('Acceleration (scaled)')
     ax[1].legend()
-
-
     st.pyplot(fig)
-
     # After the plot is shown, close it to avoid too many open figures
-    plt.close(fig)
-
+  #  plt.close(fig)
 
 # Initialize the MQTT client
 #client = paho.Client("123")  # Use a simple, unique client ID
