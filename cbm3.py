@@ -38,8 +38,7 @@ def on_message(client, userdata, message):
 
      int_sensor_id = buffer[2:3] 
 
-
-if x == 245:
+if int_sensor_id == 245:
     {
     # Extract sensor data (for demonstration, we assume specific byte positions)
     int_velx = buffer[5:7]
@@ -101,9 +100,6 @@ def update_plot():
     # After the plot is shown, close it to avoid too many open figures
     plt.close(fig)
     }
-
-elif x == 0:
-    print("The number is zero.")
 
 
 # Initialize the MQTT client
