@@ -3,6 +3,7 @@ import ssl
 import streamlit as st
 import matplotlib.pyplot as plt
 from collections import deque
+import numpy as np
 import warnings
 
 # Suppress the missing ScriptRunContext warning
@@ -14,55 +15,62 @@ scaleg = 2367.13  # Acceleration scale factor
 
 # Initialize global variables for storing data
 sensor_data = {
-    'time': deque(maxlen=100),
-    'velx': deque(maxlen=100),
-    'vely': deque(maxlen=100),
-    'velz': deque(maxlen=100),
-    'accx': deque(maxlen=100),
-    'accy': deque(maxlen=100),
-    'accz': deque(maxlen=100),
+    'time': deque(maxlen=100),  # To store time values (timestamps)
+    'velx': deque(maxlen=100),  # To store velocity X values
+    'vely': deque(maxlen=100),    # To store velocity Y values
+    'velz': deque(maxlen=100),    # To store velocity Z values
+    'accx': deque(maxlen=100),    # To store acceleration X values
+    'accy': deque(maxlen=100),    # To store acceleration Y values
+    'accz': deque(maxlen=100),    # To store acceleration Z values
 }
 
 # Callback function when connected to MQTT broker
 def on_connect(client, userdata, flags, rc):
     print(f'Connected to MQTT broker with code {rc}')
-    client.subscribe('#', qos=0)
+    client.subscribe('#', qos=0)  # Subscribe to all topics
 
 # Callback function when a message is received
 def on_message(client, userdata, message):
     payload = message.payload
     buffer = bytearray(payload)
 
-    if len(buffer) >= 18:  # Ensure sufficient data
-        int_sensor_id = 245 #buffer[2:3]  # Extract sensor ID
-        #int_sensor_id = buffer[2:3]  # Extract sensor ID
+    # Extract sensor data (for demonstration, we assume specific byte positions)
+    int_velx = buffer[5:7]
+    int_vely = buffer[7:9]
+    int_velz = buffer[9:11]
 
-        if int_sensor_id == 245:  # Check for specific sensor ID
-            # Extract and convert sensor data
-            velx = int.from_bytes(buffer[5:7], byteorder='big', signed=False) / scalev
-            vely = int.from_bytes(buffer[7:9], byteorder='big', signed=False) / scalev
-            velz = int.from_bytes(buffer[9:11], byteorder='big', signed=False) / scalev
-            accx = int.from_bytes(buffer[11:13], byteorder='big', signed=False) / scaleg
-            accy = int.from_bytes(buffer[13:15], byteorder='big', signed=False) / scaleg
-            accz = int.from_bytes(buffer[15:17], byteorder='big', signed=False) / scaleg
+    int_accx = buffer[11:13]
+    int_accy = buffer[13:15]
+    int_accz = buffer[15:17]
 
-            # Append to global data
-            sensor_data['time'].append(len(sensor_data['time']) + 1)
-            sensor_data['velx'].append(velx)
-            sensor_data['vely'].append(vely)
-            sensor_data['velz'].append(velz)
-            sensor_data['accx'].append(accx)
-            sensor_data['accy'].append(accy)
-            sensor_data['accz'].append(accz)
 
-# Streamlit application
-st.title("Real-time Sensor Data Visualization")
+    # Convert bytes to integers and scale
+    velxconvert_int = int.from_bytes(int_velx, byteorder='big', signed=False) / scalev
+    velyconvert_int = int.from_bytes(int_vely, byteorder='big', signed=False) / scalev
+    velzconvert_int = int.from_bytes(int_velz, byteorder='big', signed=False) / scalev
 
-# Update plot function
+    accxconvert_int = int.from_bytes(int_accx, byteorder='big', signed=False) / scaleg
+    accyconvert_int = int.from_bytes(int_accy, byteorder='big', signed=False) / scaleg
+    acczconvert_int = int.from_bytes(int_accz, byteorder='big', signed=False) / scaleg
+
+    # Add the received data to the global list (using time as a simple counter here)
+    sensor_data['time'].append(len(sensor_data['time']) + 1)  # Simulating time as a counter
+    sensor_data['velx'].append(velxconvert_int)
+    sensor_data['vely'].append(velyconvert_int)
+    sensor_data['velz'].append(velzconvert_int)
+    sensor_data['accx'].append(accxconvert_int)
+    sensor_data['accy'].append(accyconvert_int)
+    sensor_data['accz'].append(acczconvert_int)
+
+    # Update the Streamlit plot
+    update_plot()
+    # Function to update the plot on Streamlit
 def update_plot():
+    # Create the plot in Streamlit
     st.write("### Sensor Data")
+    
     fig, ax = plt.subplots(2, 1, figsize=(10, 6))
-
+    
     # Plot Velocity data
     ax[0].plot(sensor_data['time'], sensor_data['velx'], label='Velocity X')
     ax[0].plot(sensor_data['time'], sensor_data['vely'], label='Velocity Y')
@@ -81,17 +89,27 @@ def update_plot():
     ax[1].set_ylabel('Acceleration (scaled)')
     ax[1].legend()
 
+
     st.pyplot(fig)
+
+    # After the plot is shown, close it to avoid too many open figures
     plt.close(fig)
 
+
 # Initialize the MQTT client
+#client = paho.Client("123")  # Use a simple, unique client ID
+client = paho.Client(paho.CallbackAPIVersion.VERSION1, "123")
 client = paho.Client(client_id="", userdata=None, protocol=paho.MQTTv311)
-client.tls_set(certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED)
+client.tls_set(certfile=None,keyfile=None,cert_reqs=ssl.CERT_REQUIRED)
 client.username_pw_set("test", "12345")
 client.connect("3f4b987c21d74a5a87e6bdc7411d5651.s1.eu.hivemq.cloud", 8883)
-
 # Assign callback functions
+
+
 client.on_connect = on_connect
 client.on_message = on_message
-# Start the MQTT client loop in the background
-client.loop_start()
+# Streamlit app interface
+st.title("Real-time Sensor Data Visualization")
+# Start the MQTT loop in the background
+#client.loop_start()
+client.loop_forever(timeout=1.0)
