@@ -92,11 +92,5 @@ client.connect("3f4b987c21d74a5a87e6bdc7411d5651.s1.eu.hivemq.cloud", 8883)
 # Assign callback functions
 client.on_connect = on_connect
 client.on_message = on_message
-
-# Start the MQTT client loop in the background
-# Assign callback functions
-client.on_connect = on_connect
-client.on_message = on_message
-
 # Start the MQTT client loop in the background
 client.loop_start()
