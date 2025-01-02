@@ -34,6 +34,13 @@ def on_message(client, userdata, message):
     payload = message.payload
     buffer = bytearray(payload)
 
+
+
+     int_sensor_id = buffer[2:3] 
+
+
+if x == 245:
+    {
     # Extract sensor data (for demonstration, we assume specific byte positions)
     int_velx = buffer[5:7]
     int_vely = buffer[7:9]
@@ -81,19 +88,22 @@ def update_plot():
     ax[0].legend()
 
     # Plot Acceleration data
-    ax[1].plot(sensor_data['time'], sensor_data['accx'], label='Acceleration X')
-    ax[1].plot(sensor_data['time'], sensor_data['accy'], label='Acceleration Y')
-    ax[1].plot(sensor_data['time'], sensor_data['accz'], label='Acceleration Z')
-    ax[1].set_title('Acceleration vs Time')
-    ax[1].set_xlabel('Time')
-    ax[1].set_ylabel('Acceleration (scaled)')
-    ax[1].legend()
+   # ax[1].plot(sensor_data['time'], sensor_data['accx'], label='Acceleration X')
+ #   ax[1].plot(sensor_data['time'], sensor_data['accy'], label='Acceleration Y')
+  #  ax[1].plot(sensor_data['time'], sensor_data['accz'], label='Acceleration Z')
+   # ax[1].set_title('Acceleration vs Time')
+    #ax[1].set_xlabel('Time')
+   # ax[1].set_ylabel('Acceleration (scaled)')
+   # ax[1].legend()
 
-
+    
     st.pyplot(fig)
-
     # After the plot is shown, close it to avoid too many open figures
     plt.close(fig)
+    }
+
+elif x == 0:
+    print("The number is zero.")
 
 
 # Initialize the MQTT client
