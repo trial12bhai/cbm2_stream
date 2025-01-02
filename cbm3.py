@@ -101,7 +101,6 @@ def update_plot():
     # After the plot is shown, close it to avoid too many open figures
     plt.close(fig)
 
-else:
 
 
 # Initialize the MQTT client
