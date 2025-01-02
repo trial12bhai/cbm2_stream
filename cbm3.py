@@ -64,7 +64,8 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 # Start MQTT loop in a background thread
-client.loop_start()
+#client.loop_start()
+client.loop_forever(timeout=1.0)
 
 # Streamlit app interface
 st.title("Real-time Sensor Data Visualization")
