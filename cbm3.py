@@ -39,6 +39,8 @@ def on_message(client, userdata, message):
     int_accy = buffer[13:15]
     int_accz = buffer[15:17]
 
+
+    sensorid_int = int.from_bytes(int_sensor_id, byteorder='big',signed=False)
     # Convert bytes to integers
     velxconvert_int = int.from_bytes(int_velx, byteorder='big', signed=False) / scalev
     velyconvert_int = int.from_bytes(int_vely, byteorder='big', signed=False) / scalev
