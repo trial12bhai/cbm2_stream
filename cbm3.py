@@ -35,6 +35,43 @@ def on_message(client, userdata, message):
     buffer = bytearray(payload)
 
     int_sensor_id = buffer[2:3] 
+
+def handle_sensor_1():
+    print("Handling sensor ID 1 data")
+    # Add specific logic for sensor ID 1
+
+def handle_sensor_2():
+    print("Handling sensor ID 2 data")
+    # Add specific logic for sensor ID 2
+
+def handle_sensor_3():
+    print("Handling sensor ID 3 data")
+    # Add specific logic for sensor ID 3
+
+def handle_default():
+    print("Handling default case for unknown sensor")
+    # Add default handling logic
+
+# Dictionary to simulate switch-case
+sensor_handlers = {
+    245: handle_sensor_1,
+    246: handle_sensor_2,
+    248: handle_sensor_3
+}
+
+def on_message(client, userdata, message):
+    payload = message.payload
+    buffer = bytearray(payload)
+
+    # Extract sensor ID (Assuming it's a single byte)
+    sensor_id = int(buffer[2])  # Assuming sensor_id is located at buffer[2]
+    print(f"Sensor ID: {sensor_id}")
+
+    # Call the handler for the specific sensor ID or default
+    sensor_handlers.get(sensor_id, handle_default)()
+############################################################
+
+    
     # Extract sensor data (for demonstration, we assume specific byte positions)
     int_velx = buffer[5:7]
     int_vely = buffer[7:9]
