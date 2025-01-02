@@ -98,4 +98,4 @@ while True:
         # Render the updated graph
         st.pyplot(fig)
 
-    time.sleep(5)  # Add a small delay for smoother updates
+    time.sleep(2)  # Add a small delay for smoother updates
