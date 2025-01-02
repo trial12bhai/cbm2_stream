@@ -67,12 +67,10 @@ def on_message(client, userdata, message):
     # Update the Streamlit plot
         update_plot()
     # Function to update the plot on Streamlit
-        def update_plot():
+def update_plot():
     # Create the plot in Streamlit
         st.write("### Sensor Data")
-    
         fig, ax = plt.subplots(2, 1, figsize=(10, 6))
-    
     # Plot Velocity data
         ax[0].plot(sensor_data['time'], sensor_data['velx'], label='Velocity X')
         ax[0].plot(sensor_data['time'], sensor_data['vely'], label='Velocity Y')
