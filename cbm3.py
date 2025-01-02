@@ -107,13 +107,12 @@ client.on_message = on_message
 client.connect("3f4b987c21d74a5a87e6bdc7411d5651.s1.eu.hivemq.cloud", 8883)
 
 # Start the MQTT loop in the background
-client.loop_start()
-
+client.loop_forever(timeout=1.0)
 # Create a Streamlit app interface
 st.title("Real-time Sensor Data Visualization")
 
 # Streamlit loop to continuously update data
-while True:
+#while True:
     # Streamlit will automatically rerun this script every time it updates
     # In case of real-time updates, it automatically renders the plot with the new data
-    pass
+#    pass
