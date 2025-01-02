@@ -34,11 +34,7 @@ def on_message(client, userdata, message):
     payload = message.payload
     buffer = bytearray(payload)
     
-    int_sensor_id = buffer[2:3] 
-
-
-
-
+    int_sensor_id = buffer[2] 
 
 if int_sensor_id == 245:
     # Extract sensor data (for demonstration, we assume specific byte positions)
