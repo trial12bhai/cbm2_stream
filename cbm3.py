@@ -34,37 +34,38 @@ def on_message(client, userdata, message):
     payload = message.payload
     buffer = bytearray(payload)
     int_sensor_id = buffer[2:3] 
-    if int_sensor_id == 245:
+
+    
+ if int_sensor_id == 245:
     # Extract sensor data (for demonstration, we assume specific byte positions)
-    int_velx = buffer[5:7]
-    int_vely = buffer[7:9]
-    int_velz = buffer[9:11]
+        int_velx = buffer[5:7]
+        int_vely = buffer[7:9]
+        int_velz = buffer[9:11]
 
-    int_accx = buffer[11:13]
-    int_accy = buffer[13:15]
-    int_accz = buffer[15:17]
-
+        int_accx = buffer[11:13]
+        int_accy = buffer[13:15]
+        int_accz = buffer[15:17]
 
     # Convert bytes to integers and scale
-    velxconvert_int = int.from_bytes(int_velx, byteorder='big', signed=False) / scalev
-    velyconvert_int = int.from_bytes(int_vely, byteorder='big', signed=False) / scalev
-    velzconvert_int = int.from_bytes(int_velz, byteorder='big', signed=False) / scalev
+        velxconvert_int = int.from_bytes(int_velx, byteorder='big', signed=False) / scalev
+        velyconvert_int = int.from_bytes(int_vely, byteorder='big', signed=False) / scalev
+        velzconvert_int = int.from_bytes(int_velz, byteorder='big', signed=False) / scalev
 
-    accxconvert_int = int.from_bytes(int_accx, byteorder='big', signed=False) / scaleg
-    accyconvert_int = int.from_bytes(int_accy, byteorder='big', signed=False) / scaleg
-    acczconvert_int = int.from_bytes(int_accz, byteorder='big', signed=False) / scaleg
+        accxconvert_int = int.from_bytes(int_accx, byteorder='big', signed=False) / scaleg
+        accyconvert_int = int.from_bytes(int_accy, byteorder='big', signed=False) / scaleg
+        acczconvert_int = int.from_bytes(int_accz, byteorder='big', signed=False) / scaleg
 
     # Add the received data to the global list (using time as a simple counter here)
-    sensor_data['time'].append(len(sensor_data['time']) + 1)  # Simulating time as a counter
-    sensor_data['velx'].append(velxconvert_int)
-    sensor_data['vely'].append(velyconvert_int)
-    sensor_data['velz'].append(velzconvert_int)
-    sensor_data['accx'].append(accxconvert_int)
-    sensor_data['accy'].append(accyconvert_int)
-    sensor_data['accz'].append(acczconvert_int)
+        sensor_data['time'].append(len(sensor_data['time']) + 1)  # Simulating time as a counter
+        sensor_data['velx'].append(velxconvert_int)
+        sensor_data['vely'].append(velyconvert_int)
+        sensor_data['velz'].append(velzconvert_int)
+        sensor_data['accx'].append(accxconvert_int)
+        sensor_data['accy'].append(accyconvert_int)
+        sensor_data['accz'].append(acczconvert_int)
 
     # Update the Streamlit plot
-    update_plot()
+        update_plot()
     # Function to update the plot on Streamlit
 def update_plot():
     # Create the plot in Streamlit
