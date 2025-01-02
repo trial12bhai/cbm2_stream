@@ -65,7 +65,7 @@ def on_message(client, userdata, message):
     # Update the Streamlit plot
     update_plot()
     # Function to update the plot on Streamlit
- def update_plot():
+def update_plot():
     # Create the plot in Streamlit
     st.write("### Sensor Data")
     
