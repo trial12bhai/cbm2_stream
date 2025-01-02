@@ -74,21 +74,21 @@ def update_plot():
     
     # Plot Velocity data
     ax[0].plot(sensor_data['time'], sensor_data['velx'], label='Velocity X')
-    ax[0].plot(sensor_data['time'], sensor_data['vely'], label='Velocity Y')
-    ax[0].plot(sensor_data['time'], sensor_data['velz'], label='Velocity Z')
-    ax[0].set_title('Velocity vs Time')
-    ax[0].set_xlabel('Time')
-    ax[0].set_ylabel('Velocity (scaled)')
-    ax[0].legend()
+    #ax[0].plot(sensor_data['time'], sensor_data['vely'], label='Velocity Y')
+   # ax[0].plot(sensor_data['time'], sensor_data['velz'], label='Velocity Z')
+   # ax[0].set_title('Velocity vs Time')
+   # ax[0].set_xlabel('Time')
+   # ax[0].set_ylabel('Velocity (scaled)')
+   # ax[0].legend()
 
     # Plot Acceleration data
-    ax[1].plot(sensor_data['time'], sensor_data['accx'], label='Acceleration X')
-    ax[1].plot(sensor_data['time'], sensor_data['accy'], label='Acceleration Y')
-    ax[1].plot(sensor_data['time'], sensor_data['accz'], label='Acceleration Z')
-    ax[1].set_title('Acceleration vs Time')
-    ax[1].set_xlabel('Time')
-    ax[1].set_ylabel('Acceleration (scaled)')
-    ax[1].legend()
+   # ax[1].plot(sensor_data['time'], sensor_data['accx'], label='Acceleration X')
+   # ax[1].plot(sensor_data['time'], sensor_data['accy'], label='Acceleration Y')
+   # ax[1].plot(sensor_data['time'], sensor_data['accz'], label='Acceleration Z')
+   # ax[1].set_title('Acceleration vs Time')
+   # ax[1].set_xlabel('Time')
+   # ax[1].set_ylabel('Acceleration (scaled)')
+   # ax[1].legend()
 
     st.pyplot(fig)
 
