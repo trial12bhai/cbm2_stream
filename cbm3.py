@@ -1,4 +1,3 @@
-pip install paho-mqtt
 import paho.mqtt.client as paho
 import ssl
 import streamlit as st
