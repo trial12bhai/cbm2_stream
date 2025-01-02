@@ -34,6 +34,7 @@ def on_message(client, userdata, message):
     payload = message.payload
     buffer = bytearray(payload)
 
+    int_sensor_id = buffer[2:3] 
     # Extract sensor data (for demonstration, we assume specific byte positions)
     int_velx = buffer[5:7]
     int_vely = buffer[7:9]
