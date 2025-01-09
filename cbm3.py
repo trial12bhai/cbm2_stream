@@ -4,6 +4,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from collections import deque
 import time
+global senr
 
 # Constants for scaling
 scalev = 409.6  # Velocity scale factor
