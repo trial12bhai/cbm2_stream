@@ -61,12 +61,7 @@ def on_message(client, userdata, message):
     sensor_data['accz'].append(accz)
     sensor_data['senr'].append(senr)
 
-if senr == '245':
-    print("Sensor ID is 245")
-elif senr == '248':
-    print("Sensor ID is 246")
-else:
-    print("Sensor ID is neither 245 nor 246")
+
 
 # MQTT Client setup
 client = paho.Client(client_id="", userdata=None, protocol=paho.MQTTv311)
@@ -85,6 +80,12 @@ st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
 
 
+if senr == '245':
+    print("Sensor ID is 245")
+elif senr == '248':
+    print("Sensor ID is 246")
+else:
+    print("Sensor ID is neither 245 nor 246")
 # Streamlit update loop
 while True:
     # Update the graph dynamically
