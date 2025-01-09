@@ -47,6 +47,12 @@ def on_message(client, userdata, message):
     accx = int.from_bytes(int_accx, byteorder='big', signed=False) / scaleg
     accy = int.from_bytes(int_accy, byteorder='big', signed=False) / scaleg
     accz = int.from_bytes(int_accz, byteorder='big', signed=False) / scaleg
+    if senr == 245:
+    print("Sensor ID is 245")
+    elif senr == 248:
+    print("Sensor ID is 246")
+    else:
+    print("Sensor ID is neither 245 nor 246")
 
     # Add data to the global deque
     sensor_data['time'].append(time.time())
@@ -72,12 +78,7 @@ client.loop_start()
 # Streamlit app interface
 st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
-if senr == 245:
-    print("Sensor ID is 245")
-elif senr == 248:
-    print("Sensor ID is 246")
-else:
-    print("Sensor ID is neither 245 nor 246")
+
 
 # Streamlit update loop
 while True:
