@@ -72,11 +72,9 @@ client.loop_start()
 # Streamlit app interface
 st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
-
-
-if int_senr == 245:
+if senr == 245:
     print("Sensor ID is 245")
-elif int_senr == 248:
+elif senr == 248:
     print("Sensor ID is 246")
 else:
     print("Sensor ID is neither 245 nor 246")
