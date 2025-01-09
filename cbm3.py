@@ -31,6 +31,7 @@ def on_message(client, userdata, message):
     buffer = bytearray(payload)
 
     # Extract sensor data (assuming specific byte positions for demonstration)
+    int_sensor_id = buffer[2:3] 
     int_velx = buffer[5:7]
     int_vely = buffer[7:9]
     int_velz = buffer[9:11]
@@ -70,7 +71,7 @@ client.loop_start()
 # Streamlit app interface
 st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
-    int_sensor_id = byte_buffer[2:3] 
+
 
 if int_sensor_id == 245:
     print("Sensor ID is 245")
