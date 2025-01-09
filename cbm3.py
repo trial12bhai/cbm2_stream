@@ -82,8 +82,7 @@ graph_placeholder = st.empty()  # Placeholder for the graph
 
 if senr == '245':
   while True:
-    # Update the graph dynamically
-  with graph_placeholder.container():
+      with graph_placeholder.container():
         
         fig, ax = plt.subplots(2, 1, figsize=(10, 6))
         
