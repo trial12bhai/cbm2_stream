@@ -111,7 +111,6 @@ if senr == '245':
     time.sleep(2)  # Add a small delay for smoother updates
 
 elif senr == '246':
-    
     while True:
     # Update the graph dynamically
     with graph_placeholder.container():
