@@ -81,8 +81,8 @@ graph_placeholder = st.empty()  # Placeholder for the graph
 
 
 #if senr == '248':
-  while True:
-      with graph_placeholder.container():
+while True:
+    with graph_placeholder.container():
         
         fig, ax = plt.subplots(2, 1, figsize=(10, 6))
         
@@ -106,4 +106,4 @@ graph_placeholder = st.empty()  # Placeholder for the graph
 
         # Render the updated graph
         st.pyplot(fig)
-time.sleep(2)  # Add a small delay for smoother updates
+        time.sleep(2)  # Add a small delay for smoother updates
