@@ -80,7 +80,7 @@ st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
 
 
-if senr == '248':
+#if senr == '248':
   while True:
       with graph_placeholder.container():
         
