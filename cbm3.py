@@ -136,8 +136,4 @@ elif senr == '246':
 
         # Render the updated graph
         st.pyplot(fig)
-    time.sleep(2)  # Add a small delay for smoother updates
-
-else:
-    print("Sensor ID is neither 245 nor 246")
-# Streamlit update loop
+        time.sleep(2)  # Add a small delay for smoother updates
