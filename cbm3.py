@@ -70,14 +70,11 @@ client.loop_start()
 # Streamlit app interface
 st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
-int_sensor_id = byte_buffer[2:3] 
-#print(int_sensor_id)
+    int_sensor_id = byte_buffer[2:3] 
 
-
-
-if sensor_value == 245:
+if int_sensor_id == 245:
     print("Sensor ID is 245")
-elif sensor_value == 246:
+elif int_sensor_id == 248:
     print("Sensor ID is 246")
 else:
     print("Sensor ID is neither 245 nor 246")
