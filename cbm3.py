@@ -83,7 +83,7 @@ graph_placeholder = st.empty()  # Placeholder for the graph
 if senr == '245':
   while True:
     # Update the graph dynamically
-    with graph_placeholder.container():
+  with graph_placeholder.container():
         
         fig, ax = plt.subplots(2, 1, figsize=(10, 6))
         
@@ -138,7 +138,6 @@ elif senr == '246':
 
         # Render the updated graph
         st.pyplot(fig)
-
     time.sleep(2)  # Add a small delay for smoother updates
 
 else:
