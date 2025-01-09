@@ -19,7 +19,7 @@ sensor_data = {
     'accx': deque(maxlen=100),  # To store acceleration X values
     'accy': deque(maxlen=100),  # To store acceleration Y values
     'accz': deque(maxlen=100),  # To store acceleration Z values
-    'senr': deque(maxlen=100),
+   # 'senr': deque(maxlen=100),
 }
 
 # Callback function when connected to MQTT broker
@@ -33,7 +33,7 @@ def on_message(client, userdata, message):
     buffer = bytearray(payload)
 
     # Extract sensor data (assuming specific byte positions for demonstration)
-    int_senr = buffer[2:3] 
+    #int_senr = buffer[2:3] 
     int_velx = buffer[5:7]
     int_vely = buffer[7:9]
     int_velz = buffer[9:11]
@@ -42,7 +42,7 @@ def on_message(client, userdata, message):
     int_accz = buffer[15:17]
 
     # Convert bytes to integers and scale
-    senr = int.from_bytes(int_senr, byteorder='big', signed=False)
+   # senr = int.from_bytes(int_senr, byteorder='big', signed=False)
     velx = int.from_bytes(int_velx, byteorder='big', signed=False) / scalev
     vely = int.from_bytes(int_vely, byteorder='big', signed=False) / scalev
     velz = int.from_bytes(int_velz, byteorder='big', signed=False) / scalev
@@ -59,7 +59,7 @@ def on_message(client, userdata, message):
     sensor_data['accx'].append(accx)
     sensor_data['accy'].append(accy)
     sensor_data['accz'].append(accz)
-    sensor_data['senr'].append(senr)
+    #sensor_data['senr'].append(senr)
 
 
 
@@ -72,13 +72,12 @@ client.on_connect = on_connect
 client.on_message = on_message
 
 # Start MQTT loop in a background thread
-client.loop_start()
-#client.loop_forever(timeout=1.0)
+#client.loop_start()
+client.loop_forever(timeout=1.0)
 
 # Streamlit app interface
 st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
-
 
 #if senr == '248':
 while True:
