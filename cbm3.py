@@ -4,10 +4,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from collections import deque
 import numpy as np
-import warnings
-
-# Suppress the missing ScriptRunContext warning
-warnings.filterwarnings("ignore", message="missing ScriptRunContext! This warning can be ignored when running in bare mode")
 
 # Constants for scaling
 scalev = 409.6  # Velocity scale factor
@@ -15,8 +11,8 @@ scaleg = 2367.13  # Acceleration scale factor
 
 # Initialize global variables for storing data
 sensor_data = {
-    'time': deque(maxlen=100),  # To store time values (timestamps)
-    'velx': deque(maxlen=100),  # To store velocity X values
+    'time': deque(maxlen=100),    # To store time values (timestamps)
+    'velx': deque(maxlen=100),    # To store velocity X values
     'vely': deque(maxlen=100),    # To store velocity Y values
     'velz': deque(maxlen=100),    # To store velocity Z values
     'accx': deque(maxlen=100),    # To store acceleration X values
@@ -26,7 +22,7 @@ sensor_data = {
 
 # Callback function when connected to MQTT broker
 def on_connect(client, userdata, flags, rc):
-    print(f'Connected to MQTT broker with code {rc}')
+    print('CONNACK received with code %d.' % (rc))
     client.subscribe('#', qos=0)  # Subscribe to all topics
 
 # Callback function when a message is received
@@ -43,8 +39,7 @@ def on_message(client, userdata, message):
     int_accy = buffer[13:15]
     int_accz = buffer[15:17]
 
-
-    # Convert bytes to integers and scale
+    # Convert bytes to integers
     velxconvert_int = int.from_bytes(int_velx, byteorder='big', signed=False) / scalev
     velyconvert_int = int.from_bytes(int_vely, byteorder='big', signed=False) / scalev
     velzconvert_int = int.from_bytes(int_velz, byteorder='big', signed=False) / scalev
@@ -64,7 +59,8 @@ def on_message(client, userdata, message):
 
     # Update the Streamlit plot
     update_plot()
-    # Function to update the plot on Streamlit
+
+# Function to update the plot on Streamlit
 def update_plot():
     # Create the plot in Streamlit
     st.write("### Sensor Data")
@@ -89,27 +85,28 @@ def update_plot():
     ax[1].set_ylabel('Acceleration (scaled)')
     ax[1].legend()
 
-
     st.pyplot(fig)
 
-    # After the plot is shown, close it to avoid too many open figures
-    plt.close(fig)
-
-
 # Initialize the MQTT client
-#client = paho.Client("123")  # Use a simple, unique client ID
-client = paho.Client(paho.CallbackAPIVersion.VERSION1, "123")
-client = paho.Client(client_id="", userdata=None, protocol=paho.MQTTv311)
-client.tls_set(certfile=None,keyfile=None,cert_reqs=ssl.CERT_REQUIRED)
-client.username_pw_set("test", "12345")
-client.connect("3f4b987c21d74a5a87e6bdc7411d5651.s1.eu.hivemq.cloud", 8883)
+client = paho.Client("123")  # Use a simple client ID
+client.tls_set(certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED)  # TLS settings
+client.username_pw_set("test", "12345")  # Username and password
+
 # Assign callback functions
-
-
 client.on_connect = on_connect
 client.on_message = on_message
-# Streamlit app interface
-st.title("Real-time Sensor Data Visualization")
+
+# Connect to the MQTT broker
+client.connect("3f4b987c21d74a5a87e6bdc7411d5651.s1.eu.hivemq.cloud", 8883)
+
 # Start the MQTT loop in the background
-#client.loop_start()
-client.loop_forever(timeout=1.0)
+client.loop_start()
+
+# Create a Streamlit app interface
+st.title("Real-time Sensor Data Visualization")
+
+# Streamlit loop to continuously update data
+while True:
+    # Streamlit will automatically rerun this script every time it updates
+    # In case of real-time updates, it automatically renders the plot with the new data
+    pass
