@@ -70,13 +70,25 @@ client.loop_start()
 # Streamlit app interface
 st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
+int_sensor_id = byte_buffer[2:3] 
+#print(int_sensor_id)
+
+
+
+if sensor_value == 245:
+    print("Sensor ID is 245")
+elif sensor_value == 246:
+    print("Sensor ID is 246")
+else:
+    print("Sensor ID is neither 245 nor 246")
 
 # Streamlit update loop
 while True:
     # Update the graph dynamically
     with graph_placeholder.container():
+        
         fig, ax = plt.subplots(2, 1, figsize=(10, 6))
-
+        
         # Plot Velocity data
         ax[0].plot(sensor_data['time'], sensor_data['velx'], label='Velocity X')
         ax[0].plot(sensor_data['time'], sensor_data['vely'], label='Velocity Y')
