@@ -1,4 +1,4 @@
-    import paho.mqtt.client as paho
+import paho.mqtt.client as paho
 import ssl
 import streamlit as st
 import matplotlib.pyplot as plt
