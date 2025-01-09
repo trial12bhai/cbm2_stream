@@ -18,6 +18,7 @@ sensor_data = {
     'accx': deque(maxlen=100),  # To store acceleration X values
     'accy': deque(maxlen=100),  # To store acceleration Y values
     'accz': deque(maxlen=100),  # To store acceleration Z values
+    'senr': deque(maxlen=100),
 }
 
 # Callback function when connected to MQTT broker
@@ -47,12 +48,7 @@ def on_message(client, userdata, message):
     accx = int.from_bytes(int_accx, byteorder='big', signed=False) / scaleg
     accy = int.from_bytes(int_accy, byteorder='big', signed=False) / scaleg
     accz = int.from_bytes(int_accz, byteorder='big', signed=False) / scaleg
-if senr == '245':
-    print("Sensor ID is 245")
-elif senr == '248':
-    print("Sensor ID is 246")
-else:
-    print("Sensor ID is neither 245 nor 246")
+
 
     # Add data to the global deque
     sensor_data['time'].append(time.time())
@@ -62,6 +58,14 @@ else:
     sensor_data['accx'].append(accx)
     sensor_data['accy'].append(accy)
     sensor_data['accz'].append(accz)
+    sensor_data['senr'].append(senr)
+
+if senr == '245':
+    print("Sensor ID is 245")
+elif senr == '248':
+    print("Sensor ID is 246")
+else:
+    print("Sensor ID is neither 245 nor 246")
 
 # MQTT Client setup
 client = paho.Client(client_id="", userdata=None, protocol=paho.MQTTv311)
