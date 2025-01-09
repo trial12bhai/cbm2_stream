@@ -47,9 +47,9 @@ def on_message(client, userdata, message):
     accx = int.from_bytes(int_accx, byteorder='big', signed=False) / scaleg
     accy = int.from_bytes(int_accy, byteorder='big', signed=False) / scaleg
     accz = int.from_bytes(int_accz, byteorder='big', signed=False) / scaleg
-if senr == 245:
+if senr == '245':
     print("Sensor ID is 245")
-elif senr == 248:
+elif senr == '248':
     print("Sensor ID is 246")
 else:
     print("Sensor ID is neither 245 nor 246")
