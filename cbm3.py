@@ -80,39 +80,9 @@ st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
 
 
-if senr == '245':
+if senr == '248':
   while True:
       with graph_placeholder.container():
-        
-        fig, ax = plt.subplots(2, 1, figsize=(10, 6))
-        
-        # Plot Velocity data
-        ax[0].plot(sensor_data['time'], sensor_data['velx'], label='Velocity X')
-        ax[0].plot(sensor_data['time'], sensor_data['vely'], label='Velocity Y')
-        ax[0].plot(sensor_data['time'], sensor_data['velz'], label='Velocity Z')
-        ax[0].set_title('Velocity vs Time')
-        ax[0].set_xlabel('Time')
-        ax[0].set_ylabel('Velocity (scaled)')
-        ax[0].legend()
-
-        # Plot Acceleration data
-        ax[1].plot(sensor_data['time'], sensor_data['accx'], label='Acceleration X')
-        ax[1].plot(sensor_data['time'], sensor_data['accy'], label='Acceleration Y')
-        ax[1].plot(sensor_data['time'], sensor_data['accz'], label='Acceleration Z')
-        ax[1].set_title('Acceleration vs Time')
-        ax[1].set_xlabel('Time')
-        ax[1].set_ylabel('Acceleration (scaled)')
-        ax[1].legend()
-
-        # Render the updated graph
-        st.pyplot(fig)
-
-    time.sleep(2)  # Add a small delay for smoother updates
-
-elif senr == '246':
-    while True:
-    # Update the graph dynamically
-    with graph_placeholder.container():
         
         fig, ax = plt.subplots(2, 1, figsize=(10, 6))
         
