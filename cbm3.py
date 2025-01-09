@@ -1,4 +1,4 @@
-import paho.mqtt.client as paho
+    import paho.mqtt.client as paho
 import ssl
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -31,7 +31,7 @@ def on_message(client, userdata, message):
     buffer = bytearray(payload)
 
     # Extract sensor data (assuming specific byte positions for demonstration)
-    int_sensor_id = buffer[2:3] 
+    int_senr = buffer[2:3] 
     int_velx = buffer[5:7]
     int_vely = buffer[7:9]
     int_velz = buffer[9:11]
@@ -40,6 +40,7 @@ def on_message(client, userdata, message):
     int_accz = buffer[15:17]
 
     # Convert bytes to integers and scale
+    senr = int.from_bytes(int_senr, byteorder='big', signed=False)
     velx = int.from_bytes(int_velx, byteorder='big', signed=False) / scalev
     vely = int.from_bytes(int_vely, byteorder='big', signed=False) / scalev
     velz = int.from_bytes(int_velz, byteorder='big', signed=False) / scalev
@@ -73,9 +74,9 @@ st.title("Real-time Sensor Data Visualization")
 graph_placeholder = st.empty()  # Placeholder for the graph
 
 
-if int_sensor_id == 245:
+if int_senr == 245:
     print("Sensor ID is 245")
-elif int_sensor_id == 248:
+elif int_senr == 248:
     print("Sensor ID is 246")
 else:
     print("Sensor ID is neither 245 nor 246")
